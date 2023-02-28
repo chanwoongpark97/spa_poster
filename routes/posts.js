@@ -21,6 +21,7 @@ router.get("/", async (req, res) => {
    
     res.status(200).json({ data }); //성공시 해당 데이터 모두 보여줌
 });
+
     
   
 
