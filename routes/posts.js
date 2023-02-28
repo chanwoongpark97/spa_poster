@@ -6,7 +6,7 @@ const Post = require("../schemas/post.js")
 router.get("/", async (req, res) => {
 
     const posts = await Post.find();
-    console.log(posts)
+    // console.log(posts)
     const data = [];
     
     for(let i = 0; i < posts.length; i++){
@@ -23,10 +23,18 @@ router.get("/", async (req, res) => {
     
   
 
-//게시글 전체 목록 조회 API
+//게시글 전체 목록 조회 API (수정 전)
 // router.get("/posts", (req, res) => {
 //     res.status(200).json({ posts: posts });
 // });
+
+// 게시글 상세 조회 API (미완성, postId값만 나오고 있음)
+router.get("/:postId", (req, res) => {
+    const params = req.params;
+    console.log(params);
+    
+    res.status(200).json({});
+});
 
 // 게시글 작성 API
 const Posts = require("../schemas/post.js");
@@ -48,5 +56,23 @@ router.post("/", async (req, res) => {
     res.status(200).json({ posts: createdPosts });
 
 });
+
+// 게시글 수정 API (미완성)
+router.put("/:postId", async (req, res) => {
+    const {password} = req.params;
+    console.log(password);
+
+    const existPosts = await Posts.find({ password });
+    if (existPosts.length) {
+        await Posts.updateOne(
+          {password: password},
+          {$set: {title :title}},
+          {$set: {content :content}},
+        )
+    }
+    
+    res.status(200).json({"message": "게시글을 수정하였습니다."});
+});
+
 
 module.exports = router;

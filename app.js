@@ -1,5 +1,5 @@
 const express = require('express');
-const globalRouter = require("./routes/index.js");
+const globalRouter = require("./routes/index.js"); // 라우터 연결 관리소
 
 // 웹 서버에서 MongoDB에 연결
 const connect = require("./schemas");
@@ -7,13 +7,13 @@ connect();
 
 const app = express();
 const port = 3001;
-// 라우터 연결
+
+// 라우터 연결 (변경 전)
 // const postsRouter = require("./routes/posts.js");
 // const commentsRouter = require("./routes/comments.js");
 
 app.use(express.json());
-// localhost:3001/api -> postsRouter, indexRouter, commentsRouter
-// postsRouter, commentsRouter,
+// localhost:3001/api -> postsRouter, commentsRouter
 app.use("/api", globalRouter);
 
 app.get('/', (req, res) => {
