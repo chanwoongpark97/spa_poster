@@ -17,7 +17,11 @@ const postsSchema = new mongoose.Schema({
   content: { // 내용
     type: String,
     required: true
-  }
-});
+  },
+  // createAt: { // 작성날짜
+  //   type: Date,
+  //   required: false
+  // }
+},{ versionKey : false });
 
 module.exports = mongoose.model("Posts", postsSchema);
